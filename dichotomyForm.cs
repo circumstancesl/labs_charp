@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using org.mariuszgromada.math.mxparser;
 using System.Text.RegularExpressions;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace dichotomy_method
 {
@@ -23,6 +24,21 @@ namespace dichotomy_method
         {
             InitializeComponent();
             Presenter presenter = new Presenter(this);
+        }
+
+        double IView.lowLimit()
+        {
+            return Convert.ToDouble(txtBoxFunctionLimit.Text);
+        }
+
+        double IView.upLimit()
+        {
+            return Convert.ToDouble(txtBox.Text);
+        }
+
+        string IView.returnFunction()
+        {
+            return txtBoxFunction.Text;
         }
 
         double IView.firstSide()
@@ -56,7 +72,14 @@ namespace dichotomy_method
         }
 
         public event EventHandler<EventArgs> StartDichotomy;
+        public event EventHandler<EventArgs> CreateGraph;
 
+        void IView.ShowGraph(PlotModel plotModel, Function outputFunction, Expression outputExpression)
+        {
+            this.pvGraph.Model = plotModel;
+            expression = outputExpression;
+            Function = outputFunction;
+        }
         void IView.ShowResult(double result, double errorCheck)
         {
             if (errorCheck != 1)
@@ -117,71 +140,7 @@ namespace dichotomy_method
         {
             if (ValidateText())
             {
-                double limit = Convert.ToDouble(txtBoxInterval.Text);
-                double functionLimit = Convert.ToDouble(txtBoxFunctionLimit.Text);
-                double upFunctionLimit = Convert.ToDouble(txtBox.Text);
-                double xIntercept = double.NaN;
-                List<DataPoint> dot = new List<DataPoint>();
-
-                var plotModel = new PlotModel { Title = "График функции f(x)" };
-
-
-                var dataPoints = new List<double> { 0 };
-
-
-                var absicc = new LineSeries
-                {
-                    Title = "Абсцисс",
-                    Color = OxyColor.FromRgb(255, 0, 0),
-                    StrokeThickness = 2
-                };
-
-                absicc.Points.Add(new DataPoint(-limit, 0));
-                absicc.Points.Add(new DataPoint(limit, 0));
-
-                var ordinate = new LineSeries
-                {
-                    Title = "Ординат",
-                    Color = OxyColor.FromRgb(255, 0, 0),
-                    StrokeThickness = 2,
-                };
-
-                ordinate.Points.Add(new DataPoint(0, limit));
-                ordinate.Points.Add(new DataPoint(0, -limit));
-
-                // Создаем серию точек графика
-                var lineSeries = new LineSeries
-                {
-                    Title = "f(x)",
-                    Color = OxyColor.FromRgb(0, 0, 255) // Синий цвет линии
-                };
-
-                Function = new Function("f(x) = " + txtBoxFunction.Text);
-
-                int lowIndex = Convert.ToInt32(functionLimit);
-                int upIndex = Convert.ToInt32(upFunctionLimit);
-                for (int counterI = -lowIndex; counterI <= upIndex; ++counterI)
-                {
-                    expression = new Expression($"f({counterI})", Function);
-                    expression.setArgumentValue("x", counterI);
-                    double y = expression.calculate();
-                    if (y == 0)
-                    {
-                        xIntercept = counterI;
-                    }
-                    dot.Add(new DataPoint(counterI, y));
-                }
-
-                // Добавляем все точки в серию
-                lineSeries.Points.AddRange(dot);
-
-                // Добавляем серию точек к модели графика
-                plotModel.Series.Add(lineSeries);
-                plotModel.Series.Add(ordinate);
-                plotModel.Series.Add(absicc);
-
-
-                this.pvGraph.Model = plotModel;
+                CreateGraph(sender, e);
             }
         }
 
