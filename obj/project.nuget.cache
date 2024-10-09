@@ -1,0 +1,25 @@
+{
+  "version": 2,
+  "dgSpecHash": "S4/gFukCsZEppFJxoFp0+mOEH0Nd+Ag4NoLme66U0cxkXD/NLDJXmOVqLMFlVyYlSBnNznD0MoasQtSY7IPDqA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\79089\\source\\repos\\dichotomy_method\\dichotomy_method\\dichotomy_method.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\79089\\.nuget\\packages\\flee\\2.0.0\\flee.2.0.0.nupkg.sha512",
+    "C:\\Users\\79089\\.nuget\\packages\\mathparser.org-mxparser\\6.0.0\\mathparser.org-mxparser.6.0.0.nupkg.sha512",
+    "C:\\Users\\79089\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\79089\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
+    "C:\\Users\\79089\\.nuget\\packages\\oxyplot.core\\2.2.0\\oxyplot.core.2.2.0.nupkg.sha512",
+    "C:\\Users\\79089\\.nuget\\packages\\oxyplot.windowsforms\\2.2.0\\oxyplot.windowsforms.2.2.0.nupkg.sha512",
+    "C:\\Users\\79089\\.nuget\\packages\\system.componentmodel\\4.3.0\\system.componentmodel.4.3.0.nupkg.sha512",
+    "C:\\Users\\79089\\.nuget\\packages\\system.io\\4.3.0\\system.io.4.3.0.nupkg.sha512",
+    "C:\\Users\\79089\\.nuget\\packages\\system.reflection\\4.3.0\\system.reflection.4.3.0.nupkg.sha512",
+    "C:\\Users\\79089\\.nuget\\packages\\system.reflection.emit\\4.7.0\\system.reflection.emit.4.7.0.nupkg.sha512",
+    "C:\\Users\\79089\\.nuget\\packages\\system.reflection.emit.ilgeneration\\4.7.0\\system.reflection.emit.ilgeneration.4.7.0.nupkg.sha512",
+    "C:\\Users\\79089\\.nuget\\packages\\system.reflection.emit.lightweight\\4.7.0\\system.reflection.emit.lightweight.4.7.0.nupkg.sha512",
+    "C:\\Users\\79089\\.nuget\\packages\\system.reflection.primitives\\4.3.0\\system.reflection.primitives.4.3.0.nupkg.sha512",
+    "C:\\Users\\79089\\.nuget\\packages\\system.runtime\\4.3.0\\system.runtime.4.3.0.nupkg.sha512",
+    "C:\\Users\\79089\\.nuget\\packages\\system.text.encoding\\4.3.0\\system.text.encoding.4.3.0.nupkg.sha512",
+    "C:\\Users\\79089\\.nuget\\packages\\system.threading.tasks\\4.3.0\\system.threading.tasks.4.3.0.nupkg.sha512"
+  ],
+  "logs": []
+}
