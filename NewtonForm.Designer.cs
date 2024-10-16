@@ -51,7 +51,12 @@
             label5 = new Label();
             label6 = new Label();
             label7 = new Label();
+            groupBox1 = new GroupBox();
+            rbtn3 = new RadioButton();
+            rbtn2 = new RadioButton();
+            rbtn1 = new RadioButton();
             menuStrip1.SuspendLayout();
+            groupBox1.SuspendLayout();
             SuspendLayout();
             // 
             // label4
@@ -274,11 +279,59 @@
             label7.TabIndex = 41;
             label7.Text = "Число итераций";
             // 
+            // groupBox1
+            // 
+            groupBox1.Controls.Add(rbtn3);
+            groupBox1.Controls.Add(rbtn2);
+            groupBox1.Controls.Add(rbtn1);
+            groupBox1.Location = new Point(235, 285);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(105, 100);
+            groupBox1.TabIndex = 42;
+            groupBox1.TabStop = false;
+            // 
+            // rbtn3
+            // 
+            rbtn3.AutoSize = true;
+            rbtn3.Font = new Font("Bahnschrift SemiCondensed", 11.25F);
+            rbtn3.Location = new Point(5, 62);
+            rbtn3.Name = "rbtn3";
+            rbtn3.Size = new Size(86, 22);
+            rbtn3.TabIndex = 2;
+            rbtn3.TabStop = true;
+            rbtn3.Text = "Максимум";
+            rbtn3.UseVisualStyleBackColor = true;
+            // 
+            // rbtn2
+            // 
+            rbtn2.AutoSize = true;
+            rbtn2.Font = new Font("Bahnschrift SemiCondensed", 11.25F);
+            rbtn2.Location = new Point(5, 37);
+            rbtn2.Name = "rbtn2";
+            rbtn2.Size = new Size(79, 22);
+            rbtn2.TabIndex = 1;
+            rbtn2.TabStop = true;
+            rbtn2.Text = "Минимум";
+            rbtn2.UseVisualStyleBackColor = true;
+            // 
+            // rbtn1
+            // 
+            rbtn1.AutoSize = true;
+            rbtn1.Font = new Font("Bahnschrift SemiCondensed", 11.25F);
+            rbtn1.Location = new Point(5, 12);
+            rbtn1.Name = "rbtn1";
+            rbtn1.Size = new Size(104, 22);
+            rbtn1.TabIndex = 0;
+            rbtn1.TabStop = true;
+            rbtn1.Text = "Пересечение";
+            rbtn1.UseVisualStyleBackColor = true;
+            // 
             // NewtonForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(groupBox1);
             Controls.Add(label7);
             Controls.Add(label6);
             Controls.Add(label5);
@@ -305,6 +358,8 @@
             Text = "Метод Ньютона";
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -334,5 +389,9 @@
         private Label label5;
         private Label label6;
         private Label label7;
+        private GroupBox groupBox1;
+        private RadioButton rbtn3;
+        private RadioButton rbtn2;
+        private RadioButton rbtn1;
     }
 }

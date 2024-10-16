@@ -41,6 +41,13 @@ namespace dichotomy_method
             return Convert.ToDouble(txtBox.Text);
         }
 
+        byte IView.Choice()
+        {
+            byte choice = 1;
+
+            return choice;
+        }
+
         string IView.returnFunction()
         {
             return txtBoxFunction.Text;

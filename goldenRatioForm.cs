@@ -71,6 +71,13 @@ namespace dichotomy_method
             return Convert.ToDouble(txtBoxSecondIntervalLim.Text);
         }
 
+        byte IView.Choice()
+        {
+            byte choice = 1;
+
+            return choice;
+        }
+
         double IView.epsilon()
         {
             return Convert.ToDouble(txtBoxEpsilon.Text);

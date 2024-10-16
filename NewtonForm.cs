@@ -11,6 +11,8 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 
 namespace dichotomy_method
 {
@@ -37,6 +39,24 @@ namespace dichotomy_method
         double IView.iterationCount()
         {
             return Convert.ToDouble(txtBoxIteration.Text);
+        }
+
+        byte IView.Choice()
+        {
+            byte choice = 1;
+            if (rbtn1.Checked)
+            {
+                choice = 1;
+            }
+            else if (rbtn2.Checked)
+            {
+                choice = 2;
+            }
+            else if (rbtn3.Checked)
+            {
+                choice = 3;
+            }
+            return choice;
         }
 
         string IView.returnFunction()
@@ -107,7 +127,42 @@ namespace dichotomy_method
         {
             result = Math.Round(result, Convert.ToInt16(txtBoxLimitation.Text));
             functionResult = Math.Round(functionResult, Convert.ToInt16(txtBoxLimitation.Text));
-            MessageBox.Show("Минимум:" + result.ToString() + "\n" + "Значение минимума:" + functionResult.ToString(), "Результат", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            if (double.IsNaN(result) && !double.IsNaN(functionResult))
+            {
+                MessageBox.Show("Метод остановлен: производная достигла 0", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (!double.IsNaN(result) && double.IsNaN(functionResult))
+            {
+                if (rbtn2.Checked)
+                {
+                    MessageBox.Show("Метод остановлен: найден максимум, а не минимум. Измените начальное приближение", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else if (rbtn3.Checked)
+                {
+                    MessageBox.Show("Метод остановлен: найден минимум, а не максимум. Измените начальное приближение", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else if (double.IsNaN(result) && double.IsNaN(functionResult))
+            {
+                MessageBox.Show("Метод остановлен: за введённое число итераций он не подошёл к точке. Проверьте, есть ли у функции точки минимума или максимума, либо увеличьте число итераций", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                if (rbtn2.Checked)
+                {
+                    MessageBox.Show("Минимум:" + result.ToString() + "\n" + "Значение минимума:" + functionResult.ToString(), "Результат", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else if (rbtn3.Checked)
+                {
+                    functionResult = Math.Abs(functionResult);
+                    MessageBox.Show("Максимум:" + result.ToString() + "\n" + "Значение максимума:" + functionResult.ToString(), "Результат", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else if (rbtn1.Checked)
+                {
+                    MessageBox.Show("Точка пересечения:" + result.ToString(), "Результат", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+
 
         }
 
@@ -120,12 +175,12 @@ namespace dichotomy_method
             if (string.IsNullOrEmpty(txtBoxFirstIntervalLim.Text) || (mathces = regex.IsMatch(txtBoxFirstIntervalLim.Text)) == false)
             {
                 result = false;
-                MessageBox.Show("Ошибка ввода левого ограничения интервала", "Ошибка ввода", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Ошибка ввода начального приближения", "Ошибка ввода", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else if (string.IsNullOrEmpty(txtBoxSecondIntervalLim.Text) || (mathces = regex.IsMatch(txtBoxSecondIntervalLim.Text)) == false)
             {
                 result = false;
-                MessageBox.Show("Ошибка ввода правого ограничения интервала", "Ошибка ввода", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Ошибка ввода значения численного дифференциала", "Ошибка ввода", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else if (string.IsNullOrEmpty(txtBoxEpsilon.Text) || (mathces = regex.IsMatch(txtBoxEpsilon.Text)) == false)
             {
@@ -151,6 +206,11 @@ namespace dichotomy_method
             {
                 result = false;
                 MessageBox.Show("Ошибка ввода значения числа точек построения положительной стороны функции", "Ошибка ввода", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (string.IsNullOrEmpty(txtBoxIteration.Text) || (mathces = regex.IsMatch(txtBoxIteration.Text)) == false)
+            {
+                result = false;
+                MessageBox.Show("Ошибка ввода значения числа итераций", "Ошибка ввода", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             return result;
         }
