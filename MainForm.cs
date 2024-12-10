@@ -30,5 +30,11 @@ namespace dichotomy_method
             coordinateDescentForm coordinateDescentForm = new coordinateDescentForm();
             coordinateDescentForm.Show();
         }
+
+        private void btnSortings_Click(object sender, EventArgs e)
+        {
+            sortingForm sortingForm = new sortingForm();
+            sortingForm.Show();
+        }
     }
 }

@@ -32,7 +32,7 @@
             btnGoldenRatio = new Button();
             btnNewton = new Button();
             btnCoordinateDescent = new Button();
-            button4 = new Button();
+            btnSortings = new Button();
             button5 = new Button();
             button6 = new Button();
             button7 = new Button();
@@ -86,16 +86,17 @@
             btnCoordinateDescent.UseVisualStyleBackColor = true;
             btnCoordinateDescent.Click += btnCoordinateDescent_Click_1;
             // 
-            // button4
+            // btnSortings
             // 
-            button4.Font = new Font("Bahnschrift SemiCondensed", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button4.Location = new Point(14, 165);
-            button4.Margin = new Padding(3, 4, 3, 4);
-            button4.Name = "button4";
-            button4.Size = new Size(114, 67);
-            button4.TabIndex = 4;
-            button4.Text = "?";
-            button4.UseVisualStyleBackColor = true;
+            btnSortings.Font = new Font("Bahnschrift SemiCondensed", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnSortings.Location = new Point(14, 165);
+            btnSortings.Margin = new Padding(3, 4, 3, 4);
+            btnSortings.Name = "btnSortings";
+            btnSortings.Size = new Size(114, 67);
+            btnSortings.TabIndex = 4;
+            btnSortings.Text = "Сортировки";
+            btnSortings.UseVisualStyleBackColor = true;
+            btnSortings.Click += btnSortings_Click;
             // 
             // button5
             // 
@@ -138,7 +139,7 @@
             Controls.Add(button7);
             Controls.Add(button6);
             Controls.Add(button5);
-            Controls.Add(button4);
+            Controls.Add(btnSortings);
             Controls.Add(btnCoordinateDescent);
             Controls.Add(btnNewton);
             Controls.Add(btnGoldenRatio);
@@ -156,7 +157,7 @@
         private Button btnGoldenRatio;
         private Button btnNewton;
         private Button btnCoordinateDescent;
-        private Button button4;
+        private Button btnSortings;
         private Button button5;
         private Button button6;
         private Button button7;
