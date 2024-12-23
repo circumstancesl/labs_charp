@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Compile Update="coordinateDescentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="goldenRatioForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="integralForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="dichotomyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="matrixForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="mnkForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="NewtonForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="sortingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+</Project>
