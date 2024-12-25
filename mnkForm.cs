@@ -35,7 +35,22 @@ namespace dichotomy_method
 
             for (int indexOfX = 0; indexOfX < dataGridView1.Rows.Count - 1; ++indexOfX)
             {
-                valuesOFX[indexOfX] = Convert.ToDouble(dataGridView1.Rows[indexOfX].Cells[0].Value);
+                if (dataGridView1.Rows[indexOfX].Cells[0].Value == null)
+                {
+                    MessageBox.Show($"Ячейка X[{indexOfX}] пуста. Заменяем на 1.", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    dataGridView1.Rows[indexOfX].Cells[0].Value = 1;
+                    valuesOFX[indexOfX] = 1;
+                }
+                else if (double.TryParse(dataGridView1.Rows[indexOfX].Cells[0].Value.ToString(), out double parsedValue))
+                {
+                    valuesOFX[indexOfX] = parsedValue;
+                }
+                else
+                {
+                    MessageBox.Show($"Ячейка X[{indexOfX}] содержит недопустимые символы. Заменяем на 1.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    dataGridView1.Rows[indexOfX].Cells[0].Value = 1;
+                    valuesOFX[indexOfX] = 1;
+                }
             }
             pointNumberX = valuesOFX;
             return valuesOFX;
@@ -47,7 +62,22 @@ namespace dichotomy_method
 
             for (int indexOfY = 0; indexOfY < dataGridView1.Rows.Count - 1; ++indexOfY)
             {
-                valuesOFY[indexOfY] = Convert.ToDouble(dataGridView1.Rows[indexOfY].Cells[1].Value);
+                if (dataGridView1.Rows[indexOfY].Cells[1].Value == null)
+                {
+                    MessageBox.Show($"Ячейка Y[{indexOfY}] пуста. Заменяем на 1.", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    valuesOFY[indexOfY] = 1;
+                    dataGridView1.Rows[indexOfY].Cells[1].Value = 1;
+                }
+                else if (double.TryParse(dataGridView1.Rows[indexOfY].Cells[1].Value.ToString(), out double parsedValue))
+                {
+                    valuesOFY[indexOfY] = parsedValue;
+                }
+                else
+                {
+                    MessageBox.Show($"Ячейка Y[{indexOfY}] содержит недопустимые символы. Заменяем на 1.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    valuesOFY[indexOfY] = 1;
+                    dataGridView1.Rows[indexOfY].Cells[1].Value = 1;
+                }
             }
             pointNumberY = valuesOFY;
             return valuesOFY;
@@ -55,7 +85,24 @@ namespace dichotomy_method
 
         int IMNKView.Points()
         {
-            return Convert.ToInt32(graphPoints.Text);
+            if (int.TryParse(graphPoints.Text, out int points))
+            {
+                // Если значение отрицательное или равно 0, возвращаем 5
+                if (points <= 0)
+                {
+                    MessageBox.Show("Количество точек не может быть отрицательным или равным нулю. Устанавливаем значение 100.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    graphPoints.Text = "100";
+                    return 100;
+                }
+                return points; // Возвращаем корректное значение
+            }
+            else
+            {
+                // Если преобразование не удалось, возвращаем 5 и выводим сообщение
+                MessageBox.Show("Некорректное значение для количества точек. Устанавливаем значение 100.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                graphPoints.Text = "100";
+                return 100;
+            }
         }
 
         bool IMNKView.IsLinear()
@@ -72,6 +119,25 @@ namespace dichotomy_method
 
         void IMNKView.ShowResult(double[] result, OxyPlot.PlotModel plotModel)
         {
+            Regex regex = new Regex(@"^[\d,-]+$");
+            int accuracy;
+            if (string.IsNullOrEmpty(txtBoxOcr.Text) || (regex.IsMatch(txtBoxOcr.Text)) == false)
+            {
+                MessageBox.Show("Ошибка ввода точности. Присвоено значение 2", "Ошибка ввода", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                accuracy = 2;
+                txtBoxOcr.Text = "2";
+            }
+            else if (int.TryParse(txtBoxOcr.Text, out int parsedValue) && parsedValue < 0)
+            {
+                // Проверка на отрицательные значения
+                MessageBox.Show("Точность не может быть отрицательной. Присвоено значение 2", "Ошибка ввода", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtBoxOcr.Text = "2";
+                accuracy = 2;
+            }
+            else
+            {
+                accuracy = Convert.ToInt32(txtBoxOcr.Text);
+            }
             string resultString = "";
             if (result != null)
             {
@@ -79,15 +145,15 @@ namespace dichotomy_method
                 {
                     if (outputIndex == 0)
                     {
-                        resultString += "a" + " = " + Math.Round(result[outputIndex], 2).ToString() + "\n";
+                        resultString += "a" + " = " + Math.Round(result[outputIndex], accuracy).ToString() + "\n";
                     }
                     else if (outputIndex == 1)
                     {
-                        resultString += "b" + " = " + Math.Round(result[outputIndex], 2).ToString() + "\n";
+                        resultString += "b" + " = " + Math.Round(result[outputIndex], accuracy).ToString() + "\n";
                     }
                     else if (outputIndex == 2)
                     {
-                        resultString += "c" + " = " + Math.Round(result[outputIndex], 2).ToString() + "\n";
+                        resultString += "c" + " = " + Math.Round(result[outputIndex], accuracy).ToString() + "\n";
                     }
 
                 }
@@ -122,6 +188,7 @@ namespace dichotomy_method
 
         private void toolStripTextBox1_Click(object sender, EventArgs e)
         {
+            dataGridView1.AllowUserToAddRows = false;
             Regex regex = new Regex(@"^[\d,-]+$");
             bool result = true;
             bool mathces;
@@ -130,8 +197,16 @@ namespace dichotomy_method
             int Interval = 5;
             if (string.IsNullOrEmpty(txtBoxMatrix.Text) || (regex.IsMatch(txtBoxMatrix.Text)) == false)
             {
-                MessageBox.Show("Ошибка ввода размерности таблицы", "Ошибка ввода", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Ошибка ввода количества точек. Присвоено значене 1", "Ошибка ввода", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 matrixCount = 1;
+                txtBoxMatrix.Text = "1";
+            }
+            else if (int.TryParse(txtBoxMatrix.Text, out int parsedValue) && parsedValue < 0)
+            {
+                // Проверка на отрицательные значения
+                MessageBox.Show("Количество точек не может быть отрицательным. Присвоено значение 1", "Ошибка ввода", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                matrixCount = 1;
+                txtBoxMatrix.Text = "1";
             }
             else
             {

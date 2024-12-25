@@ -26,6 +26,8 @@ namespace dichotomy_method
 
         private void toolStripTextBox1_Click(object sender, EventArgs e)
         {
+            dataGridView1.AllowUserToAddRows = false;
+            dataGridView2.AllowUserToAddRows = false;
             Random random = new Random();
             Regex regex = new Regex(@"^[\d,-]+$");
             bool result = true;

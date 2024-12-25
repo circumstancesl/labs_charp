@@ -50,6 +50,7 @@
             rbtnFile = new RadioButton();
             rbtnManual = new RadioButton();
             linear = new RadioButton();
+            radioButton1 = new RadioButton();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             groupBox2.SuspendLayout();
@@ -108,7 +109,7 @@
             dataGridView1.Location = new Point(12, 395);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(274, 239);
+            dataGridView1.Size = new Size(309, 239);
             dataGridView1.TabIndex = 24;
             // 
             // groupBox2
@@ -130,7 +131,7 @@
             groupBox2.Font = new Font("Bahnschrift SemiCondensed", 13.8F);
             groupBox2.Location = new Point(12, 39);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(274, 298);
+            groupBox2.Size = new Size(309, 298);
             groupBox2.TabIndex = 25;
             groupBox2.TabStop = false;
             groupBox2.Text = "Настройка ввода";
@@ -281,21 +282,36 @@
             linear.Font = new Font("Bahnschrift SemiCondensed", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
             linear.Location = new Point(12, 343);
             linear.Name = "linear";
-            linear.Size = new Size(118, 28);
+            linear.Size = new Size(110, 28);
             linear.TabIndex = 31;
-            linear.Text = "Линейная?";
+            linear.Text = "Линейная";
             linear.UseVisualStyleBackColor = true;
+            // 
+            // radioButton1
+            // 
+            radioButton1.AutoSize = true;
+            radioButton1.Checked = true;
+            radioButton1.Font = new Font("Bahnschrift SemiCondensed", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            radioButton1.Location = new Point(142, 343);
+            radioButton1.Name = "radioButton1";
+            radioButton1.Size = new Size(144, 28);
+            radioButton1.TabIndex = 32;
+            radioButton1.TabStop = true;
+            radioButton1.Text = "Квадратичная";
+            radioButton1.UseVisualStyleBackColor = true;
             // 
             // mnkForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1161, 663);
+            Controls.Add(radioButton1);
             Controls.Add(linear);
             Controls.Add(groupBox2);
             Controls.Add(dataGridView1);
             Controls.Add(plotView1);
             Controls.Add(menuStrip1);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "mnkForm";
             Text = "mnkForm";
             menuStrip1.ResumeLayout(false);
@@ -331,5 +347,6 @@
         private RadioButton linear;
         private TextBox graphPoints;
         private Label label6;
+        private RadioButton radioButton1;
     }
 }
